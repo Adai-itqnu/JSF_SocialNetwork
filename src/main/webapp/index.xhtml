@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Trang chủ</title>
+    <style>
+        /* CSS tổng quát */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container chính */
+        .welcome-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        /* Nút */
+        .action-button {
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .login-button {
+            background-color: #3498db;
+        }
+
+        .login-button:hover {
+            background-color: #2980b9;
+        }
+
+        .register-button {
+            background-color: #2ecc71;
+        }
+
+        .register-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="welcome-container">
+        <h1>Chào mừng đến với Blog Management</h1>
+        <h:form>
+            <h:commandButton value="Đăng nhập" action="login.xhtml"
+                             styleClass="action-button login-button" />
+            <h:commandButton value="Đăng ký" action="register.xhtml"
+                             styleClass="action-button register-button" />
+        </h:form>
+    </div>
+</h:body>
+</html>

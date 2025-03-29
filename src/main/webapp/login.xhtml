@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Login</title>
+    <style>
+        /* CSS tổng quát */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Form đăng nhập */
+        .login-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 26px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-form label {
+            font-weight: bold;
+            color: #34495e;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .login-form input[type="text"]:focus,
+        .login-form input[type="password"]:focus {
+            border-color: #3498db;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .login-form button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Thông báo lỗi */
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: left;
+        }
+    </style>
+</h:head>
+<h:body>
+    <h:form styleClass="login-form">
+        <h1>Đăng nhập</h1>
+        <div class="form-group">
+            <h:outputLabel for="username" value="Username:" />
+            <h:inputText id="username" value="#{authController.username}" required="true"
+                         requiredMessage="Vui lòng nhập username!" />
+            <h:message for="username" styleClass="error-message" />
+        </div>
+        <div class="form-group">
+            <h:outputLabel for="password" value="Password:" />
+            <h:inputSecret id="password" value="#{authController.password}" required="true"
+                           requiredMessage="Vui lòng nhập mật khẩu!" />
+            <h:message for="password" styleClass="error-message" />
+        </div>
+        <h:commandButton value="Login" action="#{authController.login}" />
+    </h:form>
+</h:body>
+</html>

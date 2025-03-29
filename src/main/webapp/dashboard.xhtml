@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Trang quản lý bài viết</title>
+    <style>
+        /* CSS tổng quát */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+
+        /* Form tìm kiếm */
+        .search-form {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-form table {
+            width: 100%;
+        }
+
+        .search-form label {
+            font-weight: bold;
+        }
+
+        .search-form input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .search-form button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Kết quả tìm kiếm */
+        .user-info {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .user-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .user-info td, .user-info th {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .user-info th {
+            background-color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        /* Nút thêm bài viết và đăng xuất */
+        .action-button {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .action-button:hover {
+            background-color: #27ae60;
+        }
+
+        .logout-button {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Bảng danh sách bài viết */
+        .post-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-table th, .post-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .post-table th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        .post-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .post-table tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</h:head>
+<h:body>
+    <h1>Chào mừng tới Trang quản lý bài viết và nội dung</h1>
+
+    <!-- Form tìm kiếm người dùng -->
+    <h:form styleClass="search-form">
+        <h:panelGrid columns="2">
+            <h:outputLabel for="searchUsername" value="Nhập username:" />
+            <h:inputText id="searchUsername" value="#{authController.searchUsername}"
+                         required="true" requiredMessage="Vui lòng nhập username!" />
+            <h:commandButton value="Tìm kiếm" action="#{authController.searchUser}" />
+        </h:panelGrid>
+        <h:messages style="color: red;" /> <!-- Hiển thị thông báo lỗi -->
+    </h:form>
+
+    <!-- Hiển thị thông tin nếu tìm thấy -->
+    <h:panelGroup rendered="#{not empty authController.searchUser}" styleClass="user-info">
+        <h:panelGrid columns="2" border="1">
+            <h:outputText value="Username:" />
+            <h:outputText value="#{authController.searchUser.username}" />
+        </h:panelGrid>
+    </h:panelGroup>
+
+    <!-- Nút thêm bài viết -->
+    <h:form>
+        <h:commandButton value="Thêm bài viết" action="createPost.xhtml?faces-redirect=true"
+                         styleClass="action-button" />
+    </h:form>
+
+    <!-- Danh sách bài viết -->
+    <h2>Danh sách bài viết</h2>
+    <h:dataTable value="#{postController.allPosts}" var="post" styleClass="post-table">
+        <h:column>
+            <f:facet name="header">Tiêu đề</f:facet>
+            #{post.title}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Nội dung</f:facet>
+            #{post.body}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Ngày tạo</f:facet>
+            #{post.createdAt}
+        </h:column>
+    </h:dataTable>
+
+    <!-- Nút đăng xuất -->
+    <h:form>
+        <h:commandButton value="Đăng xuất" action="login.xhtml?faces-redirect=true"
+                         styleClass="logout-button" />
+    </h:form>
+</h:body>
+</html>
